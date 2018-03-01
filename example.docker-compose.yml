@@ -44,7 +44,7 @@ services:
       NGINX_BACKEND_HOST: drupal
       NGINX_SERVER_ROOT: /var/www/html/web
     volumes:
-      - ./web:/var/www/html
+      - ./:/var/www/html
 #      - docker-sync:/var/www/html # Docker-sync for macOS users
     labels:
       - 'traefik.docker.network=drupal'
