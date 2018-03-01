@@ -27,3 +27,9 @@ in-with-root:
 
 stop:
 	docker-compose stop
+
+clean:
+	docker-compose down
+
+build:
+	docker-compose build
