@@ -28,10 +28,14 @@ services:
       DB_DRIVER: postgres
       PHP_XDEBUG: 1
       PHP_XDEBUG_DEFAULT_ENABLE: 1
-      PHP_XDEBUG_REMOTE_CONNECT_BACK: 1         # This is needed to respect remote.host setting bellow
-      # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 1
+      # MACOS
+      # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0 # This is needed to respect remote.host setting bellow
+      # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254" # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
+      PHP_BLACKFIRE: 1
     volumes:
       - ./:/var/www/html
+#      - ./:/var/www/html:cached # User-guided caching
 #      - docker-sync:/var/www/html # Docker-sync for macOS users
 
   nginx:
@@ -45,7 +49,9 @@ services:
       NGINX_SERVER_ROOT: /var/www/html/web
     volumes:
       - ./:/var/www/html
-#      - docker-sync:/var/www/html # Docker-sync for macOS users
+      # Options for macOS users (https://docker4drupal.readthedocs.io/en/latest/macos)
+      #      - ./:/var/www/html:cached # User-guided caching
+      #      - docker-sync:/var/www/html # Docker-sync
     labels:
       - 'traefik.docker.network=drupal'
       - 'traefik.backend=nginx'
