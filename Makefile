@@ -14,7 +14,7 @@ run:
 	docker-compose up -d postgres
 	docker-compose up -d drupal
 	docker-compose up -d traefik
-	docker-compose up -d nginx
+	docker-compose up nginx
 
 in:
 	docker-compose exec drupal /bin/bash
