@@ -2,7 +2,7 @@ version: "3"
 
 services:
   postgres:
-    image: postgres:10.2
+    image: postgres:10.4
     environment:
       POSTGRES_PASSWORD: 'ljflejffjhi3984n'
       POSTGRES_USER: 'drupal'
@@ -18,7 +18,7 @@ services:
       - 'traefik.frontend.rule=Host:postgres.docker.localhost'
 
   drupal:
-    image: wodby/drupal-php:7.1-4.1.1
+    image: wodby/drupal-php:7.1-4.5.1
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DB_HOST: postgres
@@ -39,7 +39,7 @@ services:
 #      - docker-sync:/var/www/html # Docker-sync for macOS users
 
   nginx:
-    image: wodby/drupal-nginx:8-1.13-4.0.1
+    image: wodby/drupal-nginx:8-1.15-4.2.0
     depends_on:
       - drupal
     environment:
