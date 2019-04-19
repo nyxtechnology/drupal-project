@@ -1,5 +1,5 @@
 {
-    "name": "nyx/drupal-project",
+    "name": "nyxtechnology/drupal-project",
     "description": "Project template for Drupal 8 projects with composer and Docker",
     "type": "project",
     "license": "MIT",
