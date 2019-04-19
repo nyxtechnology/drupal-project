@@ -22,3 +22,10 @@
 
 # Ignore .env files as they are personal
 /.env
+
+.idea/
+.docker-sync/
+
+# Ignore database files
+docker/database/data/*
+!docker/database/data/.keep

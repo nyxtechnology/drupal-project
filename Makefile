@@ -1,35 +1,9 @@
--include env_make
+include docker.mk
 
 .PHONY: test
 
-drupal ?= 8
-php ?= 7.1
-
-default: run
+DRUPAL_VER ?= 8
+PHP_VER ?= 7.2
 
 test:
-	cd ./test/$(drupal)/$(php) && ./run.sh
-
-run:
-	docker-compose up -d postgres
-	docker-compose up -d drupal
-	docker-compose up -d traefik
-	docker-compose up nginx
-
-in:
-	docker-compose exec drupal /bin/bash
-
-in-nginx:
-	docker-compose exec nginx /bin/bash
-
-in-with-root:
-	docker-compose exec --user root drupal /bin/bash
-
-stop:
-	docker-compose stop
-
-clean:
-	docker-compose down
-
-build:
-	docker-compose build
+	cd ./tests/$(DRUPAL_VER) && PHP_VER=$(PHP_VER) ./run.sh

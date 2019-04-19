@@ -1,6 +1,6 @@
 # Composer template for Drupal projects
 
-This project is based from https://github.com/drupal-composer/drupal-project
+This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
 
 [![Build Status](https://travis-ci.org/drupal-composer/drupal-project.svg?branch=8.x)](https://travis-ci.org/drupal-composer/drupal-project)
 
