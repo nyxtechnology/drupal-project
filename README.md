@@ -1,32 +1,31 @@
-# Composer template for Drupal projects
+# Composer template for Drupal projects with docker
 
 This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
 
-[![Build Status](https://travis-ci.org/drupal-composer/drupal-project.svg?branch=8.x)](https://travis-ci.org/drupal-composer/drupal-project)
-
-This project template provides a starter kit for managing your site
-dependencies with [Composer](https://getcomposer.org/).
-
-If you want to know how to use it as replacement for
-[Drush Make](https://github.com/drush-ops/drush/blob/8.x/docs/make.md) visit
-the [Documentation on drupal.org](https://www.drupal.org/node/2471553).
+##Depedencies
+- Docker
+- Docker Compose
+- Make
+- Composer
 
 ## Usage
 
-First you need to [install composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
-
-> Note: The instructions below refer to the [global composer installation](https://getcomposer.org/doc/00-intro.md#globally).
-You might need to replace `composer` with `php composer.phar` (or similar) 
-for your setup.
+1- Install Docker
+2- Install docker-compose
 
 After that you can create the project:
 
 ```
-composer create-project drupal-composer/drupal-project:8.x-dev some-dir --no-interaction
+composer composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
 ```
 
-With `composer require ...` you can download new dependencies to your 
-installation.
+3- Run command `make up`
+
+4- Try access http://drupal.docker.local
+
+5- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
+
+Look docker.mk to see others make commands and read .env about database settings
 
 ```
 cd some-dir
@@ -52,6 +51,7 @@ When installing the given `composer.json` some tasks are taken care of:
 * Latest version of drush is installed locally for use at `vendor/bin/drush`.
 * Latest version of DrupalConsole is installed locally for use at `vendor/bin/drupal`.
 * Creates environment variables based on your .env file. See [.env.example](.env.example).
+* Graphql module
 
 ## Updating Drupal Core
 

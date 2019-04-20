@@ -29,3 +29,6 @@
 # Ignore database files
 docker/database/data/*
 !docker/database/data/.keep
+
+# Ignore docker override.yml
+docker-compose.override.yml
