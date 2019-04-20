@@ -20,7 +20,7 @@ After that you can create the project:
 composer composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
 ```
 ---
-#### Only Mac users
+#### 3 - Only Mac users
 
 Update this lines
 
@@ -34,11 +34,11 @@ More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for
 
 ---
 
-3- Run command `make up`
+4- Run command `make up`
 
-4- Try access http://drupal.docker.local
+5- Try access http://drupal.docker.local
 
-5- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
+6- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
 
 Look docker.mk to see others make commands and read .env about database settings
 
