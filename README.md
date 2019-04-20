@@ -19,6 +19,20 @@ After that you can create the project:
 ```
 composer composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
 ```
+---
+#### Only Mac users
+
+Update this lines
+
+.env file
+
+`Change PHP_TAG to use macos images.`
+
+In docker-compose.override.yml, search for `For macOS users` comment.
+
+More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for you choice between cache or docker-sync
+
+---
 
 3- Run command `make up`
 
