@@ -2,7 +2,7 @@
 
 This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
 
-##Depedencies
+## Depedencies
 - Docker
 - Docker Compose
 - Make
@@ -11,6 +11,7 @@ This project is based from https://github.com/drupal-composer/drupal-project and
 ## Usage
 
 1- Install Docker
+
 2- Install docker-compose
 
 After that you can create the project:
