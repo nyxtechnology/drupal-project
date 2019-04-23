@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+
   php:
     image: wodby/drupal:$DRUPAL_TAG
     environment:
@@ -25,6 +26,11 @@ services:
 #      - docker-sync:/var/www/html # Docker-sync
 ## For XHProf and Xdebug profiler traces
 #      - files:/mnt/files
+
+## For windows users
+#  mariadb:
+#    environment:
+#      MYSQL_INNODB_FLUSH_METHOD: fsync
 
 #  nginx:
 #    volumes:
