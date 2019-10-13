@@ -20,7 +20,7 @@ After that you can create the project:
 composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
 ```
 ---
-3- Rename .env.example to .env and if necessary, change the variables.
+3- Copy .env.example to .env and if necessary, change the variables.
 
 #### 3.1 - Only Mac users
 
