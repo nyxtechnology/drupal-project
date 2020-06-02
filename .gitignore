@@ -32,3 +32,5 @@ docker/database/data/*
 
 # Ignore docker override.yml
 docker-compose.override.yml
+/.editorconfig
+/.gitattributes
