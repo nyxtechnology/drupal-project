@@ -1,6 +1,6 @@
 include docker.mk
 
-## app-update:			Update the xingu plataform
+## app-update:			Update the plataform
 .PHONY: app-update
 app-update:
 	docker-compose up php-install
