@@ -1,0 +1,23 @@
+ahoyapi: v2
+commands:
+  ps:
+    cmd: docker-compose ps "$@"
+    usage: List the running docker-compose containers.
+
+  start:
+    cmd: docker-compose start "$@"
+    usage: Start the docker-compose containers.
+
+  stop:
+    cmd: docker-compose stop "$@"
+    usage: Stop the docker-compose containers.
+
+  restart:
+    cmd: docker-compose restart "$@"
+    usage: Restart the docker-compose containers.
+
+
+  #This command overrides the up command in the docker.ahoy.yml to test the "last in wins" feature of ahoy
+  up:
+    cmd: "docker-compose up -d"
+    usage: Start the docker-compose containers.
