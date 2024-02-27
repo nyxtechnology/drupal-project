@@ -28,9 +28,9 @@ composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-in
 
 4- Run command `make up`
 
-5- Add your `project_base_url` in your hosts file and try access http://drupal.docker.local
+5- Run command `make composer install`
 
-6- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
+6- Add your `project_base_url` in your hosts file and try access http://drupal.docker.localhost
 
 Look docker.mk to see others make commands and read .env about database settings
 
