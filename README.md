@@ -1,40 +1,30 @@
-# Composer template for Drupal projects with docker
+# Composer template for Drupal projects
 
-This project is based from https://github.com/drupal-composer/drupal-project and https://github.com/wodby/docker4drupal
+[![CI](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml/badge.svg?branch=10.x)](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml)
 
 ## Depedencies
-- Docker
-- Docker Compose
+
+- Docker with Docker Compose
+  - [Docker](https://docs.docker.com/get-docker/)
 - Make
+  - [GNU Make](https://www.gnu.org/software/make/)
 - Composer
+    - [Composer](https://getcomposer.org/)
+- Git
+    - [Git](https://git-scm.com/)
 
 ## Usage
 
 1- Install Docker
 
-2- Install docker-compose
 
 After that you can create the project:
 
 ```
 composer create-project nyxtechnology/drupal-project:dev-master some-dir --no-interaction
 ```
----
-3- Copy .env.example to .env and if necessary, change the variables.
 
-#### 3.1 - Only Mac users
-
-Update this lines
-
-.env file
-
-`Change PHP_TAG to use macos images.`
-
-In docker-compose.override.yml, search for `For macOS users` comment.
-
-More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for you choice between cache or docker-sync
-
----
+2- Copy `.env.example` to `.env` and change the values
 
 4- Run command `make up`
 
@@ -43,15 +33,6 @@ More information: https://wodby.com/docs/stacks/drupal/local/#docker-for-mac for
 6- If you need GraphQl, after drupal installation, enable the graphql module in http://drupal.docker.local/admin/modules
 
 Look docker.mk to see others make commands and read .env about database settings
-
-```
-cd some-dir
-composer require drupal/devel:~1.0
-```
-
-The `composer create-project` command passes ownership of all files to the
-project that is created. You should create a new git repository, and commit
-all files not excluded by the .gitignore file.
 
 ## What does the template do?
 
@@ -81,8 +62,8 @@ new release of Drupal core.
 
 Follow the steps below to update your core files.
 
-1. Run `composer update drupal/core webflo/drupal-core-require-dev "symfony/*" --with-dependencies` to update Drupal Core and its dependencies.
-1. Run `git diff` to determine if any of the scaffolding files have changed.
+1. Run `composer update "drupal/core-*" --with-dependencies` to update Drupal Core and its dependencies.
+2. Run `git diff` to determine if any of the scaffolding files have changed.
    Review the files for any changes and restore any customizations to
   `.htaccess` or `robots.txt`.
 1. Commit everything all together in a single commit, so `web` will remain in
@@ -94,13 +75,6 @@ Follow the steps below to update your core files.
    keeping all of your modifications at the beginning or end of the file is a
    good strategy to keep merges easy.
 
-## Generate composer.json from existing project
-
-With using [the "Composer Generate" drush extension](https://www.drupal.org/project/composer_generate)
-you can now generate a basic `composer.json` file from an existing project. Note
-that the generated `composer.json` might differ from this project's file.
-
-
 ## FAQ
 
 ### Should I commit the contrib modules I download?
@@ -110,11 +84,14 @@ workrounds if a project decides to do it anyway](https://getcomposer.org/doc/faq
 
 ### Should I commit the scaffolding files?
 
-The [drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) plugin can download the scaffold files (like
-index.php, update.php, …) to the web/ directory of your project. If you have not customized those files you could choose
-to not check them into your version control system (e.g. git). If that is the case for your project it might be
-convenient to automatically run the drupal-scaffold plugin after every install or update of your project. You can
-achieve that by registering `@composer drupal:scaffold` as post-install and post-update command in your composer.json:
+The [Drupal Composer Scaffold](https://github.com/drupal/core-composer-scaffold)
+plugin can download the scaffold files (like index.php, update.php, …) to the
+web/ directory of your project. If you have not customized those files you could
+choose to not check them into your version control system (e.g. git). If that is
+the case for your project it might be convenient to automatically run the
+drupal-scaffold plugin after every install or update of your project. You can
+achieve that by registering `@composer drupal:scaffold` as post-install and
+post-update command in your composer.json:
 
 ```json
 "scripts": {
@@ -128,6 +105,7 @@ achieve that by registering `@composer drupal:scaffold` as post-install and post
     ]
 },
 ```
+
 ### How can I apply patches to downloaded modules?
 
 If you need to apply patches (depending on the project being modified, a pull
@@ -136,6 +114,7 @@ request is often a better solution), you can do so with the
 
 To add a patch to drupal module foobar insert the patches section in the extra
 section of composer.json:
+
 ```json
 "extra": {
     "patches": {
@@ -145,7 +124,18 @@ section of composer.json:
     }
 }
 ```
-### How do I switch from packagist.drupal-composer.org to packages.drupal.org?
 
-Follow the instructions in the [documentation on drupal.org](https://www.drupal.org/docs/develop/using-composer/using-packagesdrupalorg).
+### How do I specify a PHP version?
 
+This project supports PHP 8.1 as minimum version (see [Environment requirements of Drupal 10](https://www.drupal.org/docs/system-requirements/php-requirements)), however it's possible that a `composer update` will upgrade some package that will then require PHP 8.1+.
+
+To prevent this you can add this code to specify the PHP version you want to use in the `config` section of `composer.json`:
+
+```json
+"config": {
+    "sort-packages": true,
+    "platform": {
+        "php": "8.1.13"
+    }
+},
+```
