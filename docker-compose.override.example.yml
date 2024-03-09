@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+
+  php:
+    image: wodby/drupal:$DRUPAL_TAG
+    environment:
+      PHP_SENDMAIL_PATH: '/usr/bin/msmtp -t'
+      MSMTP_HOST: mailhog
+      MSMTP_PORT: 1025
+#      PHP_SENDMAIL_PATH: '"/usr/bin/dos2unix -u | /usr/bin/msmtp -t"'
+      PHP_FPM_USER: wodby
+      PHP_FPM_GROUP: wodby
+      #      COLUMNS: 80 # Set 80 columns for docker exec -it.
+      #      # Read instructions at https://wodby.com/docs/stacks/php/local/#xdebug
+      #      PHP_XDEBUG: 1
+      #      PHP_XDEBUG_MODE: debug
+      #      PHP_XDEBUG_MODE: profile
+      #      PHP_XDEBUG_USE_COMPRESSION: false
+      #      PHP_IDE_CONFIG: serverName=my-ide
+      #      PHP_XDEBUG_IDEKEY: "my-ide"
+      #      PHP_XDEBUG_CLIENT_HOST: 172.17.0.1 # Linux
+      #      PHP_XDEBUG_CLIENT_HOST: host.docker.internal # Docker 18.03+ Mac/Win
+      #      PHP_XDEBUG_CLIENT_HOST: 10.0.75.1 # Windows, Docker < 18.03
+      #      PHP_XDEBUG_LOG: /tmp/php-xdebug.log
+      #      # PHPUnit Drupal testing configurations
+      #      SIMPLETEST_BASE_URL: "http://nginx"
+      #      SIMPLETEST_DB: "${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}#tests_"
+      #      MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless"]}}, "http://chrome:9515"]'
+  nginx:
+    environment:
+      NGINX_ERROR_LOG_LEVEL: debug
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: "${PROJECT_NAME}_mailhog"
+    labels:
+      - "traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025"
+      - "traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`mailhog.${PROJECT_BASE_URL}`)"

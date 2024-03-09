@@ -19,9 +19,7 @@ services:
     image: wodby/drupal-php:$PHP_TAG
     container_name: "${PROJECT_NAME}_php"
     environment:
-      # For PHP 8.2 use busybox sendmail together with "PHP_MAIL_MIXED_LF_AND_CRLF=On".
       PHP_MAIL_MIXED_LF_AND_CRLF: On
-      PHP_SENDMAIL_PATH: '/bin/busybox sendmail -t -i -S mailhog:25'
       DB_HOST: $DB_HOST
       DB_PORT: $DB_PORT
       DB_USER: $DB_USER
@@ -29,6 +27,8 @@ services:
       DB_NAME: $DB_NAME
       DB_DRIVER: $DB_DRIVER
       DRUSH_OPTIONS_URI: "http://${PROJECT_BASE_URL}:${PROJECT_PORT}"
+#      MSMTP_HOST: opensmtpd
+#      MSMTP_PORT: 25
     volumes:
       - ./:/var/www/html:cached
   ## Alternative for macOS users: Mutagen https://wodby.com/docs/stacks/drupal/local#docker-for-mac
@@ -65,8 +65,6 @@ services:
     #    - drupal:/var/www/html
     labels:
       - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
-
-
 
   #  postgres:
   #    image: wodby/postgres:$POSTGRES_TAG
